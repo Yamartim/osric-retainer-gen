@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arden-Vul / OSRIC Retainer Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'osric-red': '#8B0000',
+                        'osric-gold': '#D4AF37',
+                        'osric-parchment': '#F5E7C1',
+                    },
+                    fontFamily: {
+                        'osric': ['"Times New Roman"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'parchment': "url('https://img.freepik.com/free-photo/old-paper-texture_1194-5413.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/free-photo/old-paper-texture_1194-5413.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6 font-osric">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-osric-red mb-2">Arden-Vul / OSRIC Retainer Generator</h1>
+        </header>
+
+        <div class="bg-osric-parchment p-6 rounded-lg shadow-lg mb-8 border-2 border-osric-gold">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <label for="characterCount" class="text-lg font-medium text-osric-red">Number of Retainers:</label>
+                <input type="number" id="characterCount" min="1" max="10" value="1" class="w-20 px-3 py-2 border border-osric-red rounded-md text-center">
+                
+                <button onclick="generateCharacters()" class="px-6 py-2 bg-osric-red text-osric-parchment font-bold rounded-md hover:bg-osric-red/80 transition">Generate</button>
+            </div>
+        </div>
+
+        <div id="charactersContainer" class="flex flex-wrap gap-6"></div>
+    </div>
+
+    <script src="retainer-gen.js"></script>
+</body>
+</html>
