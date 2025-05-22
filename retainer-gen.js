@@ -1,28 +1,9 @@
-// Data pools
-const races_gosterwick = [
-    {name: "Archontean", chance: 40},
-    {name: "Thorcin", chance: 40},
-    {name: "Wiskin", chance: 15},
-    {name: "demi-human", chance: 5},
+const {races_gosterwick, classes, classes_rare } = require("./data");
 
-];
-
-const classes = [
-    {name: "fighter", chance: 40},
-    {name: "magic user", chance: 20},
-    {name: "cleric", chance: 20},
-    {name: "thief", chance: 20},
-
-];
-
-const classes_rare = [
-    {base: "fighter", name: "paladin", chance_in: 10},
-    {base: "fighter", name: "ranger", chance_in: 10},
-    {base: "magic user", name: "illusionist", chance_in: 6},
-    {base: "cleric", name: "druid", chance_in: 6},
-    {base: "thief", name: "assassin", chance_in: 6},
-];
-
+console.log(races_gosterwick);
+console.log(classes);
+console.log(classes_rare);
+console.log("teste: ", generateCharacter());
 
 function rollAbilityScore() {
     let result = Math.floor(Math.random() * 6) + 1
@@ -64,7 +45,7 @@ function rollClass(){
         {
             rare = (Math.floor(Math.random() * rclass.chance_in)) == 0
             if (rare) {
-                result = result + " - " + rclass.name;
+                result = result + " - " + rclass.name.toUpperCase();
                 break;
             }
         }
