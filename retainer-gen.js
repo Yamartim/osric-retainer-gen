@@ -1,34 +1,21 @@
+//PARA TESTES NO NODEJS
 //const {races_gosterwick, classes, classes_rare } = require("./data");
 
-
-const races_gosterwick = [
-    { name: "archontean", chance: 40 },
-    { name: "thorcin", chance: 40 },
-    { name: "aiskin", chance: 15 },
-    { name: "demi-human", chance: 5 },
-];
-
-const classes = [
-    {name: "fighter", chance: 40},
-    {name: "magic user", chance: 20},
-    {name: "cleric", chance: 20},
-    {name: "thief", chance: 20},
-    
-];
-
-const classes_rare = [
-    { base: "fighter", name: "paladin", chance_in: 10 },
-    { base: "fighter", name: "ranger", chance_in: 10 },
-    { base: "magic user", name: "illusionist", chance_in: 6 },
-    { base: "cleric", name: "druid", chance_in: 6 },
-    { base: "thief", name: "assassin", chance_in: 6 },
-];
-
-
-console.log(races_gosterwick);
-console.log(classes);
-console.log(classes_rare);
+//console.log(races_gosterwick);
+//console.log(classes);
+//console.log(classes_rare);
 //console.log("teste: ", generateCharacter());
+
+let races_gosterwick, classes, classes_rare;
+
+fetch("./data.json")
+    .then(res => res.json())
+    .then(data => {
+        //console.log(data);
+        races_gosterwick = data.races_gosterwick;
+        classes = data.classes;
+        classes_rare = data.classes_rare;
+    })
 
 function rollAbilityScore() {
     let result = Math.floor(Math.random() * 6) + 1
@@ -63,7 +50,7 @@ function rollClass(){
             break;
         }
     }
-    
+
     let rare = false;
     for (const rclass of classes_rare) {
         if (result === rclass.base)
@@ -83,7 +70,7 @@ function rollClass(){
 function generateCharacter() {
     const race = rollRace().toUpperCase();
     const cclass = rollClass();
-    
+
     // Ability scores
     const abilities = {
         Strength: rollAbilityScore(),
@@ -93,7 +80,7 @@ function generateCharacter() {
         Wisdom: rollAbilityScore(),
         Charisma: rollAbilityScore()
     };
-    
+
     return { race, cclass, abilities };
 }
 
@@ -102,11 +89,11 @@ function generateCharacters() {
     const count = parseInt(document.getElementById("characterCount").value) || 1;
     const container = document.getElementById("charactersContainer");
     container.innerHTML = "";
-    
+
     for (let i = 0; i < count; i++) {
         const character = generateCharacter();
         const card = document.createElement("div");
-        
+
         card.innerHTML = `
             <div class="bg-osric-parchment p-6 rounded-lg border-2 border-osric-gold shadow-md w-full md:w-72">
                 <div class="border-b border-osric-gold pb-2 mb-4">
@@ -137,7 +124,7 @@ function generateCharacters() {
                 </div>
             </div>
             `;
-        
+
         container.appendChild(card);
     }
 }
